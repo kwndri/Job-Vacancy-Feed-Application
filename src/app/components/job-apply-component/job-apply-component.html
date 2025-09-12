@@ -1,0 +1,81 @@
+<app-header-component></app-header-component>
+<div class="bg-gradient-to-br from-gray-500 via-black to-gray-900 w-[60%] mx-auto rounded-md pt-[70px] mt-[30px]  pb-[50px]">
+    <div class="mx-auto">
+        <h2 class="font-bold text-3xl bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent text-center pb-[50px]">Join Our Team</h2>
+        <p class="text-gray-300 text-center text-lg pb-[30px]">Want to be a part of our team? Apply for this job now!</p>
+        <form [formGroup]="form" class="w-1/2 mx-auto px-4vw" (ngSubmit)='onSubmit()'>
+            <div class="form-group flex flex-row mx-auto gap-[2vw]" formGroupName="fullName">
+                <div class="form-group flex flex-col gap-3 w-1/2 mx-auto" >
+                    <label for="firstName" class="text-white font-semibold ">First Name</label>
+                    <input type="text" formControlName="firstName" class="text-white form-control rounded-md w-full p-1  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="firstName">
+                    <div *ngIf="firstName?.errors?.['required'] && firstName?.touched" class="text-red-400 text-sm mt-1">
+                            First Name is required.
+                    </div>
+                </div>
+                <div class="form-group flex flex-col gap-3 w-1/2 mx-auto" >
+                    <label for="lastName" class="text-white font-semibold">Last Name</label>
+                    <input type="text" formControlName="lastName" class="text-white form-control rounded-md p-1  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="lastName">
+                    <div *ngIf="lastName?.errors?.['required'] && lastName?.touched" class="text-red-400 text-sm mt-1">
+                            Last Name is required.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group flex flex-col gap-3  mx-auto pt-[25px]" >
+                <label for="email" class="text-white font-semibold">Email</label>
+                <input type="email" formControlName="email" class="text-white form-control rounded-md w-full p-1  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="firstName">
+                <div *ngIf="email?.errors?.['required'] && email?.touched" class="text-red-400 text-sm mt-1">
+                            Email is required.
+                </div>
+                <div *ngIf="(!email?.errors?.['required']) && email?.touched && email?.invalid" class="text-red-400 text-sm mt-1">
+                            Please enter a valid email address.
+                </div>
+            </div>
+            <div class="form-group flex flex-col gap-3  mx-auto pt-[25px]" >
+                <label for="phoneNumber" class="text-white font-semibold">Phone Number</label>
+                <input type="number" formControlName="phoneNumber" class="text-white form-control rounded-md w-full p-1  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="phoneNumber">
+                <div *ngIf="phoneNumber?.errors?.['required'] && phoneNumber?.touched" class="text-red-400 text-sm mt-1">
+                            Phone Number  is required.
+                    </div>
+            </div>
+            <div class="form-group flex flex-col gap-3  mx-auto pt-[25px]" >
+                <label for="message" class="text-white font-semibold">Message</label>
+                <textarea rows='4' type="text" formControlName="message" class="text-white form-control rounded-md w-full p-1  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="message"></textarea>
+            </div>
+            <div class="flex items-center gap-3 pt-[25px]">
+                <label for="agree" class="relative inline-flex items-center cursor-pointer">
+                    <input 
+                    type="checkbox" 
+                    id="agree" 
+                    formControlName="agree" 
+                    class="sr-only peer"
+                    />
+                <div class="w-11 h-6 bg-gray-300 rounded-full peer peer-checked:bg-purple-600 
+                            after:content-[''] after:absolute after:top-[2px] after:left-[2px] 
+                            after:bg-white after:border-gray-300 after:border after:rounded-full 
+                            after:h-5 after:w-5 after:transition-all peer-checked:after:translate-x-5"
+                            >
+                </div>
+                </label>
+                <span class="text-white text-sm">By selecting this, you agree to our <a class="text-purple-500 hover:cursor-pointer">privacy policy</a></span>
+                
+            </div>
+            <div *ngIf="(!agree?.value) && submitted && (!showModal)" class="text-red-400 text-sm mt-2">
+                            You have to agree with our privacy policy.
+            </div>
+            <button class="text-center text-sm p-1 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 text-white font-semibold w-full py-2 shadow-lg transition  rounded-md mt-[25px]">Apply for this job</button>
+        </form>
+    </div>
+</div>
+<div *ngIf="showModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+  <div class="bg-white rounded-lg shadow-lg p-6 w-96 relative flex flex-col">
+    <h2 class="text-xl font-bold mb-4">Application Submitted!</h2>
+    <p class="mb-4">Thank you for applying for this job!. We will contact you soon.</p>
+    <button class=" self-center px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600 transition " (click)="onHomePage()">
+            Go to Home Page
+    </button>
+    
+  </div>
+</div>
+<app-footer-component></app-footer-component>
+
+

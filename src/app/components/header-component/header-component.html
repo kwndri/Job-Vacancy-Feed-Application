@@ -1,0 +1,12 @@
+<div class="bg-white flex flex-row justify-between ">
+    <a  routerLink="/jobs">
+        <img src="logo.jpg" class="w-[100px] h-[80px] object-contain cursor-pointer">
+    </a>
+    
+    <form #form = "ngForm" (ngSubmit)="onSubmit(form)" class="flex-1 text-center p-4">
+       <input id="user_input" type="text" name="userInput"  ngModel  #userInput="ngModel" class=" w-[40%] border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500" placeholder="Search for company, business or municipal"> 
+    </form>
+    <div>
+        <p></p>
+    </div>
+</div>

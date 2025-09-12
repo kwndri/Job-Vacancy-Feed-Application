@@ -1,0 +1,47 @@
+<app-header-component></app-header-component>
+@if(!isLoading()){
+    @if(job()?.title) {
+        <div class="bg-white max-w-[1100px] pl-6 py-7 mx-auto  rounded-lg mt-[30px] pb-[100px]">
+            <div class="w-[95%]">
+                <h1 class="text-blue-700 font-bold mx-auto text-center text-xl">{{job()?.title}}</h1>
+                @for(location of job()?.workLocations; track job()?.title) {
+                    <div class="flex flex-row text-gray-900 mx-auto justify-center gap-1 mt-1">
+                        @if(location) {
+                            <p class="text-gray-900 ">{{location?.address}},</p>
+                            <p class="text-gray-900 ">{{location?.city}},</p>
+                            <p class="text-gray-900 ">{{location?.country}}</p>
+                        }
+                    </div>
+                }
+                <p class="text-gray-700 mx-auto mt-4 prose prose-lg" [innerHTML]="job()?.description"></p>
+                <h1 class="text-blue-500 font-bold mx-auto  text-lg text-center mt-6">Our team</h1>
+            <!-- @for(contact of job()?.contactList; track contact) {
+                <div class="flex flex-row text-gray-900 mx-auto justify-center gap-4">
+                        @if(contact) {
+                            <p class="text-gray-900 ">Name: {{contact?.name}}</p>
+                            <p class="text-gray-900 ">Email: {{contact?.email}}</p>
+                            <p class="text-gray-900 ">Phone Number: {{contact?.phone}}</p>
+                        }
+                    </div>
+                } the actual code to retrieve the contact person info from api. We don't use it now because we don't have much info to use-->
+                <app-contact-team-component></app-contact-team-component>
+                <h1 class="text-blue-700 font-bold mx-auto  text-lg text-center mt-7">Who are we?</h1>
+                <h1 class="text-gray-900 font-semibold mx-auto  text-lg text-center mt-1">Company Name:  <span>{{job()?.employer?.name}}</span></h1>
+                <p class="text-gray-900 mx-auto mt-2" [innerHTML]="job()?.employer?.description"></p>
+                <div class="flex flex-row gap-1 mt-3">
+                    <p class="text-gray-900">Want to learn more about us?</p>
+                    <a href="{{job()?.employer?.homepage}}" class="text-blue-600 hover:text-purple-600 font-medium transition-colors duration-200">Visit our Webpage</a>
+                </div>
+                <div class="flex flex-row justify-center mx-auto mt-4">
+                    <button  class="bg-blue-500 text-white  rounded-lg p-2" (click)="onClick()">Apply Now</button>
+                </div>
+            </div>
+        </div>
+        
+    }@else {
+        <p class="text-white text-lg mt-4 mx-auto text-center font-semibold">Sorry, this job advertisement is currently inactive!</p>
+    }
+}@else {
+
+}
+<app-footer-component></app-footer-component>

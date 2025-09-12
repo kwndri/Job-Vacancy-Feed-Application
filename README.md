@@ -1,6 +1,34 @@
 # JobFeed
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3, **TypeScript** and **Tailwind CSS 3.4.17**
+
+The API requires authentication via a signed JWT token. While a public token is available for experimentation, for production use,
+you should obtain a private token.
+
+Review the Terms of Use: Familiarize yourself with the terms of use associated with the API.
+
+For detailed information on the API endpoints, response structures, and usage guidelines, refer to the API documentation:
+[text](https://navikt.github.io/pam-stilling-feed/)
+
+Note: In my design, the service is degisned to retrieve all the job feeds for the last 1 month. You can increase or decrease this time period from the job-feeds-service.ts by changing the last week variable.
+
+## UI Design & Tailwind Customization
+
+This project uses Tailwind CSS 3.4.17 for styling, with a combination of standard utility classes and custom templates I created myself.
+
+Some parts of the interface may look unique or slightly unconventional because they are custom-tailored components and layouts. The goal was to showcase my UI/UX design abilities and how I can creatively use Tailwind to build responsive and visually appealing interfaces, while also maintaining functionality.
+
+Key points:
+
+Responsive design using Tailwind's utility classes.
+
+Focus on accessibility and user experience.
+
+Some visual tweaks are intentionally crafted to demonstrate design skill, even if the content of them seem to not fit on this web application (e.g. footer component).
+
+Images used for the members of the team in the job description are just a copy of a tailwind plus template example. The API doesn't return such kind of info, so as referred before i created this custom template driven by Tailwind Plus examples.
+
+The frontend is designed to display only the active job feeds based on the info returned from the API. Unfortunately, some feeds which seems to be active in first place, when requesting their details we can see that they are inactive.
 
 ## Development server
 
