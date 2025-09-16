@@ -12,6 +12,7 @@
                             First Name is required.
                     </div>
                 </div>
+                
                 <div class="form-group flex flex-col gap-3 w-1/2 mx-auto" >
                     <label for="lastName" class="text-white font-semibold">Last Name</label>
                     <input type="text" formControlName="lastName" class="text-white form-control rounded-md p-1  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="lastName">
@@ -62,7 +63,7 @@
             <div *ngIf="(!agree?.value) && submitted && (!showModal)" class="text-red-400 text-sm mt-2">
                             You have to agree with our privacy policy.
             </div>
-            <button class="text-center text-sm p-1 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 text-white font-semibold w-full py-2 shadow-lg transition  rounded-md mt-[25px]">Apply for this job</button>
+            <button class="text-center text-sm p-1 bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-400 hover:to-purple-400 text-white font-semibold w-full py-2 shadow-lg transition  rounded-md mt-[25px]" type="submit">Apply for this job</button>
         </form>
     </div>
 </div>
