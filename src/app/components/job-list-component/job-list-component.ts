@@ -90,7 +90,7 @@ export class JobListComponent {
       formattedDate
     )}`;
     this.error.set('');
-
+    this.isLoading.set(true);
     this.fetchJobs(url, formattedDate);
   }
 }
