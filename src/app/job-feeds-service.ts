@@ -18,8 +18,8 @@ export class JobFeedsService {
     return lastWeek.toUTCString();
   }
 
-  fetchJobs(url: string) {
-    const ifModifiedSince = this.getLastWeekUTCString();
+  fetchJobs(url: string, modifiedSince?: string) {
+    const ifModifiedSince = modifiedSince || this.getLastWeekUTCString();
 
     const headers = new HttpHeaders({
       'If-Modified-Since': ifModifiedSince,
