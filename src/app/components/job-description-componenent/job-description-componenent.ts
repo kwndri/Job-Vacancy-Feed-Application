@@ -12,11 +12,17 @@ import { JobFeedsService } from '../../job-feeds-service';
 import { HeaderComponent } from '../header-component/header-component';
 import { FooterComponent } from '../footer-component/footer-component';
 import { ContactTeamComponent } from '../contact-team-component/contact-team-component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-job-description-componenent',
-  imports: [HeaderComponent, FooterComponent, ContactTeamComponent],
+  imports: [
+    HeaderComponent,
+    FooterComponent,
+    ContactTeamComponent,
+    CommonModule,
+  ],
   templateUrl: './job-description-componenent.html',
   styleUrl: './job-description-componenent.css',
 })
@@ -28,6 +34,7 @@ export class JobDescriptionComponenent {
   private router = inject(Router);
   isLoading = signal<boolean>(true);
   id!: string;
+  error = signal<string | null>('');
 
   ngOnInit() {
     const sub = this.route.paramMap.subscribe((params) => {
@@ -39,7 +46,14 @@ export class JobDescriptionComponenent {
             this.isLoading.set(false);
             console.log(data);
           },
-          error: (err) => console.error('Failed to load job', err),
+          error: (err: Error) => {
+            this.isLoading.set(false);
+            if (err) {
+              this.error.set(err.message);
+            } else {
+              this.error.set('');
+            }
+          },
         });
       }
     });
