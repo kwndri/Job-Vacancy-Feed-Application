@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -16,6 +16,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class LoginPageComponent {
   private router = inject(Router);
+  forgotPassword = signal<boolean>(false);
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required]),
@@ -43,5 +44,13 @@ export class LoginPageComponent {
 
   onHomePage() {
     this.router.navigate(['/']);
+  }
+
+  closeModal() {
+    this.forgotPassword.set(false);
+  }
+
+  openModal() {
+    this.forgotPassword.set(true);
   }
 }
