@@ -1,0 +1,60 @@
+<div class="bg-gradient-to-r from-zinc-900 via-gray-500 to-zinc-700 flex flex-row items-center justify-center h-[100vh]">
+    <div class="lg:grid lg:grid-cols-2 flex flex-col-reverse bg-gradient-to-r from-slate-900 from- via-slate-400 via- to-slate-800 to- md:max-w-2xl lg:max-w-4xl xl:max-w-6xl rounded-lg w-full">
+        <div class="flex flex-col flex-1 gap-[20px] w-full mx-[50px] mt-[30px] lg:mx-[0px] lg:mt-[0px] pt-[20px]">
+            <div class="flex flex-col flex-1 gap-[10px] max-w-[80%] justify-start w-full lg:mx-auto pb-[30px] lg:self-center">
+                <h1 class="text-white font-sans font-bold text-3xl">Welcome back</h1>
+                <p class="font-sans text-gray-400">Please enter your details</p>
+                <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                    <div class="form-group flex flex-col gap-3  mx-auto mt-[25px]" >
+                        <label for="username" class="text-white font-semibold">Username</label>
+                        <input type="text" formControlName="username" class="text-white form-control rounded-md w-full p-[6px]  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="username">
+                    </div>
+                    <div *ngIf="username?.errors?.['required'] && username?.touched" class="text-red-400 text-sm mt-2">
+                            Username is required.
+                    </div>
+                    <div class="form-group flex flex-col gap-3  mx-auto mt-[25px]" >
+                        <label for="email" class="text-white font-semibold">Email</label>
+                        <input type="email" formControlName="email" class="text-white form-control rounded-md w-full p-[6px]  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="email">
+                    </div>
+                    <div *ngIf="email?.errors?.['required'] && email?.touched" class="text-red-400 text-sm mt-2">
+                            Email is required.
+                    </div>
+                    <div *ngIf="(!email?.errors?.['required']) && email?.touched && email?.invalid" class="text-red-400 text-sm mt-2">
+                            Please enter a valid email address.
+                    </div>
+                    <div class="form-group flex flex-col gap-3  mx-auto mt-[25px]" >
+                        <label for="phoneNumber" class="text-white font-semibold">Phone number</label>
+                        <input type="number" formControlName="phoneNumber" class="text-white form-control rounded-md w-full p-[6px]  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="phoneNumber">
+                    </div>
+                    <div *ngIf="phoneNumber?.errors?.['required'] && phoneNumber?.touched" class="text-red-400 text-sm mt-2">
+                            Phone number is required.
+                    </div>
+                    <div formGroupName="passwords" >
+                        <div class="form-group flex flex-col gap-3  mx-auto mt-[25px]">
+                            <label for="New Password" class="text-white font-semibold">Password</label>
+                            <input type="password" formControlName="newPassword" class="text-white form-control rounded-md w-full p-[6px]  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400"  id="newPassword">
+                            <div  *ngIf="newPassword?.touched && newPassword?.errors?.['required']">
+                                <div class="text-red-400 text-sm mt-2">Password is Required</div>
+                            </div>
+                        </div>
+                        <div class="form-group flex flex-col gap-3  mx-auto mt-[25px]">
+                            <label for="Confirm Password" class="text-white font-semibold">Confirm Password</label>
+                            <input type="password" formControlName="confirmPassword" class="text-white form-control rounded-md w-full p-[6px]  bg-gray-700 border border-gray-600 focus:border-indigo-400 focus:ring-indigo-400" id="confirmPassword">
+                            <div  *ngIf="newPassword?.dirty  && confirmPassword?.errors?.['required'] && confirmPassword?.touched ">
+                                <div class="text-red-400 text-sm mt-2">Confirm Password is required</div>
+                            </div>
+                            <div  *ngIf="passwordsGroup.errors?.['notMatchPasswords'] && confirmPassword?.dirty && !confirmPassword?.errors?.['required']">
+                                <div class="text-red-400 text-sm mt-2">Passwords do not match</div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" [disabled]="form.invalid" class="disabled:bg-gray-400 disabled:cursor-not-allowed text-center p-[6px] bg-blue-600 hover:bg-blue-400 text-white w-full rounded-lg mt-[25px]">Sign up</button>
+                
+                </form>
+            </div>
+        </div>
+        <div class= " flex-1 lg:max-h-full">
+            <img src="sign-up-form.jpg" class="w-full lg:h-full h-[300px] xs:h-[400px]  object-cover">
+        </div>
+    </div>
+</div>
