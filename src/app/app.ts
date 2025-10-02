@@ -10,14 +10,7 @@ import { JobApplyComponent } from './components/job-apply-component/job-apply-co
 @Component({
   standalone: true,
   selector: 'app-root',
-  imports: [
-    RouterOutlet,
-    CommonModule,
-    HeaderComponent,
-    FooterComponent,
-    ContactTeamComponent,
-    JobApplyComponent,
-  ],
+  imports: [RouterOutlet, CommonModule, HeaderComponent, FooterComponent],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
