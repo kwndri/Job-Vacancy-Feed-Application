@@ -28,7 +28,7 @@ export class JobListComponent {
   jobs = signal<FeedItem[] | null>([]);
   route = inject(ActivatedRoute);
   filterValue: string | null = null;
-  private destroRef = inject(DestroyRef);
+  private destroyRef = inject(DestroyRef);
   selectedDate: string | null = null;
   error = signal<string | null>('');
   isLoading = signal<boolean>(true);
