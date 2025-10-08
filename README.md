@@ -2,8 +2,7 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.3, **TypeScript** and **Tailwind CSS 3.4.17**
 
-The API requires authentication via a signed JWT token. While a public token is available for experimentation, for production use,
-you should obtain a private token.
+The API requires authentication via a signed JWT token. Visit https://navikt.github.io/pam-stilling-feed/ to apply for a token.
 
 Review the Terms of Use: Familiarize yourself with the terms of use associated with the API.
 
