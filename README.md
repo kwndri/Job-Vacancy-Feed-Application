@@ -10,7 +10,7 @@ Review the Terms of Use: Familiarize yourself with the terms of use associated w
 For detailed information on the API endpoints, response structures, and usage guidelines, refer to the API documentation:
 [text](https://navikt.github.io/pam-stilling-feed/)
 
-Note: In my design, the service is degisned to retrieve all the job feeds for the last 1 month. You can increase or decrease this time period from the job-feeds-service.ts by changing the last week variable.
+Note: In my design, the service is degisned to retrieve all the job feeds for the last 1 month by default. If you want to change this a date picker has been implemented.
 
 ## UI Design & Tailwind Customization
 
