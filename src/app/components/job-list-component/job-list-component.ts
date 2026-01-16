@@ -1,5 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { Component, DestroyRef, inject, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  DestroyRef,
+  inject,
+  OnInit,
+  signal,
+} from '@angular/core';
 import { JobFeedsService } from '../../job-feeds-service';
 import { FeedItem, JobsFeed } from '../../model';
 import { ActivatedRoute } from '@angular/router';
@@ -20,37 +27,38 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './job-list-component.html',
   styleUrl: './job-list-component.css',
 })
-export class JobListComponent {
-  first_ever_url = signal<string>('');
-  next_url = signal<string>('');
-  prev_url = signal<string>('');
-  current_url = signal<string>('');
-  jobs = signal<FeedItem[] | null>([]);
+export class JobListComponent implements OnInit {
+  private jobFeed = inject(JobFeedsService);
   route = inject(ActivatedRoute);
-  filterValue: string | null = null;
   private destroyRef = inject(DestroyRef);
   selectedDate: string | null = null;
+  currentPage = signal<number>(1);
+  readonly PAGE_SIZE = 10;
+  jobs = signal<FeedItem[] | null>([]);
+  filterValue: string | null = null;
   error = signal<string | null>('');
   isLoading = signal<boolean>(true);
+  feedUrl = signal<string>('/api/v1/feed');
+  totalPages = computed(() =>
+    Math.ceil(this.jobs()!.length / this.PAGE_SIZE || 1)
+  );
 
-  constructor(private jobFeed: JobFeedsService) {}
+  paginatedJobs = computed(() => {
+    const start = (this.currentPage() - 1) * this.PAGE_SIZE;
+    return this.jobs()!.slice(start, start + this.PAGE_SIZE);
+  });
+
+  constructor() {}
 
   fetchJobs(url: string, modifiedSince?: string) {
     const subscription = this.jobFeed.fetchJobs(url).subscribe({
       next: (data) => {
         this.isLoading.set(false);
-        this.next_url.set(data.next_url);
-        this.current_url.set(data.feed_url);
-        this.first_ever_url.set(data.feed_url);
-        const filteredData = data.items.filter(
-          (item) => item._feed_entry.status === 'ACTIVE'
-        );
-        console.log(filteredData);
 
         this.route.queryParamMap.subscribe((params) => {
           const filterValue = params.get('filter');
           if (filterValue) {
-            const newData = filteredData.filter(
+            const newData = data.items.filter(
               (item) =>
                 item._feed_entry.title.includes(filterValue) ||
                 item._feed_entry.businessName.includes(filterValue) ||
@@ -58,7 +66,7 @@ export class JobListComponent {
             );
             this.jobs.set(newData);
           } else {
-            this.jobs.set(filteredData);
+            this.jobs.set(data.items);
           }
         });
       },
@@ -74,12 +82,7 @@ export class JobListComponent {
   }
 
   ngOnInit() {
-    this.fetchJobs('/api/v1/feed');
-  }
-
-  onNextPage() {
-    this.prev_url.set(this.current_url());
-    this.fetchJobs(this.next_url());
+    this.fetchJobs(this.feedUrl());
   }
 
   onDateChange() {

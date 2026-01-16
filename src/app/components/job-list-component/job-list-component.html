@@ -36,7 +36,7 @@
     <p>No jobs found</p>
   }
   <div class="grid grid-cols-1 gap-4 sm2: md:grid-cols-2  lg:grid-cols-3 xl2:grid-cols-4 ">
-  @for(job of jobs(); track job.url) {
+  @for(job of paginatedJobs(); track job.url) {
     <app-job-card-component [job]='job'></app-job-card-component>
     }
   </div>
@@ -44,7 +44,7 @@
 
   }@else {
     <div class="flex flex-row justify-center mx-auto gap-3 mt-[30px]">
-      <button [disabled]="!next_url()" class="bg-blue-500 text-white p-3 rounded-lg" (click)="onNextPage()">Next Page</button>
+      <button [disabled]="" class="bg-blue-500 text-white p-3 rounded-lg" >Next Page</button>
     </div>
   }
 </div>
